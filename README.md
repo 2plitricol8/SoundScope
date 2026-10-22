@@ -31,7 +31,9 @@ Con `?demo` nell'indirizzo parte subito il segnale simulato.
   davvero un tono (prominenza ≥ 20 dB), altrimenti compare "nessun tono dominante".
 * **Spettrogramma** e **Ottave / Terzi**. I limiti degli assi (Y min/max, livello di trigger, media) si scelgono con la ruota
   di selezione, senza tastiera; dopo la calibrazione gli assi si spostano da soli su valori tondi.
-* **Fonometro**: livelli come nell'app desktop. Su schermi stretti (iPad in verticale, iPhone) e' una scheda a parte.
+* **Fonometro**: livelli come nell'app desktop. Il pulsante **Fonometro** in alto (verde = visibile) nasconde il pannello per
+  dare tutta la larghezza a spettro e oscilloscopio; la scelta viene ricordata. Nascosto, il pannello non si aggiorna, ma le
+  statistiche continuano a essere calcolate (Leq, Lmax, ecc. al ritorno includono anche quel periodo). Su schermi stretti (iPad in verticale, iPhone) e' una scheda a parte.
 * **Calibra…**: applica al microfono una sorgente di livello noto, inserisci il livello e premi *Calibra*
   (media degli ultimi 3 s, ponderazione Z). La calibrazione e' salvata nel browser per microfono e frequenza di campionamento.
 

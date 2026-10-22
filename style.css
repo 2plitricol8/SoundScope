@@ -17,6 +17,7 @@ input[type=checkbox] { min-height: 0; width: 20px; height: 20px; vertical-align:
 button { cursor: pointer; }
 button:active { filter: brightness(1.3); }
 button.primary { background: #0e6a96; border-color: #1d8fc4; font-weight: 600; }
+button.toggle.active { background: #166534; border-color: #22c55e; color: #dcfce7; }
 button.on { background: var(--red); border-color: #dc2626; }
 .bar { display: flex; gap: 8px; align-items: center; padding: 8px 10px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
 .bar select { max-width: 40vw; }
@@ -59,7 +60,10 @@ main { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 320px; 
 .diag { padding: 4px 10px 6px; font-size: 11px; color: var(--dim); border-top: 1px solid var(--line); font-family: ui-monospace, Menlo, monospace; }
 .only-narrow { display: none; }
 
+body.no-meter main { grid-template-columns: 1fr; }
+body.no-meter .meter:not(.in-tab) { display: none; }
 @media (max-width: 900px) {
+  #meterToggle { display: none; }
   main { grid-template-columns: 1fr; }
   .only-narrow { display: inline-block; }
   #bigVal { font-size: 56px; }

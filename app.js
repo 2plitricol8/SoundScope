@@ -592,7 +592,7 @@ $("resetBtn").onclick = () => { if (S.running) { S.meter.resetStats(); histSerie
 
 // ------------------------------------------------------------------ ciclo di disegno
 function diagLine() {
-  const parts = [`SoundScope Web 0.1.1`];
+  const parts = [`SoundScope Web 0.1.2`];
   if (S.running) {
     parts.push(`${Math.round(S.fs)} Hz`);
     if (S.kind === "mic" && S.trackSettings) {
@@ -656,6 +656,16 @@ placeMeter();
 $("startBtn").onclick = () => { showWarn(""); S.running && S.kind === "mic" ? stop() : start("mic"); };
 $("demoBtn").onclick = () => { showWarn(""); S.running && S.kind === "demo" ? stop() : start("demo"); };
 $("freeze").onchange = () => { frozenScope = null; };
+// pannello del fonometro: nascondilo per dare tutta la larghezza ai grafici (scelta ricordata)
+function setMeterShown(on) {
+  document.body.classList.toggle("no-meter", !on);
+  $("meterToggle").classList.toggle("active", on);
+  $("meterToggle").setAttribute("aria-pressed", String(on));
+  store.set("soundscope.meterShown", on ? "1" : "0");
+  meterT = 0;
+}
+$("meterToggle").onclick = () => setMeterShown(document.body.classList.contains("no-meter"));
+setMeterShown(store.get("soundscope.meterShown", "1") !== "0");
 $("wt").onchange = $("tw").onchange = () => { meterT = 0; histSeries.length = 0; };
 $("logf").onchange = () => { };
 
