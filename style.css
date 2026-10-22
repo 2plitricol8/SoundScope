@@ -12,6 +12,7 @@ body {
 }
 select, input, button { font: inherit; color: var(--text); background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; min-height: 36px; padding: 4px 10px; }
 input[type=number] { width: 82px; }
+select.num { min-width: 74px; }
 input[type=checkbox] { min-height: 0; width: 20px; height: 20px; vertical-align: middle; accent-color: var(--accent); }
 button { cursor: pointer; }
 button:active { filter: brightness(1.3); }

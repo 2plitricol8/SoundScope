@@ -9,6 +9,30 @@ const store = {
   del(k) { try { localStorage.removeItem(k); } catch { /* idem */ } },
 };
 
+
+// Campi numerici come menu a scelta (su iPad compare la ruota di selezione, non la tastiera)
+const NUM_SPECS = {
+  ymin: [-200, 200, 10, -120], ymax: [-200, 200, 10, 0], bMin: [-200, 200, 10, -110], bMax: [-200, 200, 10, -10],
+  sgMin: [-200, 200, 5, -110], sgMax: [-200, 200, 5, -30],
+  trigLevel: [-1, 1, 0.05, 0], avg: [0, 0.95, 0.05, 0.6],
+};
+const roundTo = (v, step) => +(Math.round(v / step) * step).toFixed(2);
+function setNum(id, v) {
+  const sel = $(id);
+  const s = String(+(+v).toFixed(2));
+  if (![...sel.options].some((o) => o.value === s)) {            // valore fuori elenco: lo aggiunge in ordine
+    const opt = new Option(s, s);
+    const next = [...sel.options].find((o) => parseFloat(o.value) > parseFloat(s));
+    sel.add(opt, next || null);
+  }
+  sel.value = s;
+}
+for (const [id, [lo, hi, step, def]] of Object.entries(NUM_SPECS)) {
+  const sel = $(id);
+  for (let v = lo; v <= hi + 1e-9; v += step) { const s = String(+v.toFixed(2)); sel.append(new Option(s, s)); }
+  setNum(id, def);
+}
+
 // ------------------------------------------------------------------ stato
 const S = {
   running: false, kind: null,       // 'mic' | 'demo'
@@ -559,17 +583,20 @@ function onOffsetChanged(old, neu) {
 function rescaleForOffset(old, neu) {
   const d = Math.round(neu - old);
   if (!d) return;
-  for (const id of ["ymin", "ymax", "sgMin", "sgMax", "bMin", "bMax"]) $(id).value = String(parseFloat($(id).value) + d);
+  for (const id of ["ymin", "ymax", "sgMin", "sgMax", "bMin", "bMax"]) {
+    const step = NUM_SPECS[id][2];
+    setNum(id, roundTo(parseFloat($(id).value) + d, step));       // l'asse resta su valori "tondi"
+  }
 }
 $("resetBtn").onclick = () => { if (S.running) { S.meter.resetStats(); histSeries.length = 0; } };
 
 // ------------------------------------------------------------------ ciclo di disegno
 function diagLine() {
-  const parts = [`SoundScope Web 0.1.0`];
+  const parts = [`SoundScope Web 0.1.1`];
   if (S.running) {
     parts.push(`${Math.round(S.fs)} Hz`);
     if (S.kind === "mic" && S.trackSettings) {
-      const t = S.trackSettings, f = (v) => (v === undefined ? "?" : v ? "ON" : "off");
+      const t = S.trackSettings, f = (v) => (v === undefined ? "n/d" : v ? "ON" : "off");
       parts.push(`eco ${f(t.echoCancellation)} · NS ${f(t.noiseSuppression)} · AGC ${f(t.autoGainControl)}`);
     }
     parts.push(`${S.fps} fps`);

@@ -29,7 +29,8 @@ Con `?demo` nell'indirizzo parte subito il segnale simulato.
 * **Oscilloscopio + Spettro**: base tempi, scala verticale, trigger (auto/libero, fronte, livello), blocco; FFT da 1024 a 32768,
   finestre Hann/Blackman-Harris/Flat-top/Rettangolare, media, asse log/lin. Il picco e il THD si mostrano solo se c'e'
   davvero un tono (prominenza ≥ 20 dB), altrimenti compare "nessun tono dominante".
-* **Spettrogramma** e **Ottave / Terzi**.
+* **Spettrogramma** e **Ottave / Terzi**. I limiti degli assi (Y min/max, livello di trigger, media) si scelgono con la ruota
+  di selezione, senza tastiera; dopo la calibrazione gli assi si spostano da soli su valori tondi.
 * **Fonometro**: livelli come nell'app desktop. Su schermi stretti (iPad in verticale, iPhone) e' una scheda a parte.
 * **Calibra…**: applica al microfono una sorgente di livello noto, inserisci il livello e premi *Calibra*
   (media degli ultimi 3 s, ponderazione Z). La calibrazione e' salvata nel browser per microfono e frequenza di campionamento.
@@ -41,7 +42,7 @@ dB SPL = dBFS + offset di calibrazione.
 
 * **Elaborazione del sistema.** Safari/iOS puo' applicare al microfono cancellazione d'eco, soppressione del rumore e
   controllo automatico del guadagno. L'app chiede di disattivarli e mostra nella riga in basso se il sistema ha obbedito
-  (`eco off · NS off · AGC off`); se compare **ON** vedrai un avviso e le misure non sono affidabili (toni che scompaiono,
+  (`eco off · NS off · AGC off`; "n/d" significa che Safari non riporta quel parametro (non che sia spento: verifica con un tono stazionario a 1 kHz)); se compare **ON** vedrai un avviso e le misure non sono affidabili (toni che scompaiono,
   livelli che "respirano"). E' lo stesso problema avuto con il driver Windows. Per misure serie la versione nativa
   (modalita' di misura di iOS) o un microfono esterno USB-C sono preferibili.
 * **Microfono interno dell'iPad**: risposta in frequenza e sensibilita' non note; senza calibrazione i valori sono relativi.
