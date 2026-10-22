@@ -1,5 +1,5 @@
 // Cache dell'app per l'uso offline. Incrementa VERSION a ogni pubblicazione per forzare l'aggiornamento.
-const VERSION = "soundscope-web-0.1.2";
+const VERSION = "soundscope-web-0.1.3";
 const FILES = ["./", "index.html", "style.css", "app.js", "dsp.js", "meter.js", "worklet.js", "manifest.webmanifest",
   "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 

@@ -592,7 +592,7 @@ $("resetBtn").onclick = () => { if (S.running) { S.meter.resetStats(); histSerie
 
 // ------------------------------------------------------------------ ciclo di disegno
 function diagLine() {
-  const parts = [`SoundScope Web 0.1.2`];
+  const parts = [`SoundScope Web 0.1.3`];
   if (S.running) {
     parts.push(`${Math.round(S.fs)} Hz`);
     if (S.kind === "mic" && S.trackSettings) {
